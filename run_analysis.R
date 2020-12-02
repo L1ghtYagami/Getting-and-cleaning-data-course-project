@@ -103,12 +103,16 @@ df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]})
 # Tidy up the column names of the dataframe
 names(df) <- sub("^f", "frequency.", names(df))
 names(df) <- gsub("-", ".", names(df))
-names(df) <- sub("()$", "", names(df))
+names(df) <- sub("[(][)]", "", names(df))
 names(df) <- sub("^t", "time.", names(df))
 
 # Group by subject and activity, then find out the average of all observations
 # that have the same subject and activity
 tidy_df <- df %>% group_by(subject, activity) %>% summarise(across(.fns = mean))
 
+# Convert tidy_df to dataframe
+tidy_df <- as.data.frame(tidy_df)
+tidy_df <- apply(tidy_df, 2, as.character)
+
 # Save the tidy data in a file inside "Data" directory
-write.csv(tidy_data, "./Data/tidy_data.csv")
+write.csv(tidy_df, "./Data/tidy_data.csv", row.names = FALSE)
