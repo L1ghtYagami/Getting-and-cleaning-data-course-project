@@ -1,13 +1,13 @@
 # Load in packages
 library(dplyr)
 
-# Load in config.R or directly define the variables
+# Define the directory to test and train datasets
 datasets <- c(test = "./Data/UCI HAR Dataset/test/",
               train = "./Data/UCI HAR Dataset/train/")
 
 
 get_column_names <- function() {
-    # Create a dataframe with column names as entries
+    # his function creates a dataframe with features of the data as entries
     df_names <- read.table("./Data/UCI HAR Dataset/features.txt",
                            col.names = c("index", "feature"))
 
@@ -17,9 +17,11 @@ get_column_names <- function() {
 
 get_activity_names <- function() {
     # This function gets all the activity names for the corresponding labels
+    # Get activities from file
     activities <- read.table("./Data/UCI HAR Dataset/activity_labels.txt",
                            col.names = c("label", "activity"))
 
+    # Create a list where label = activity
     activities_list <- list()
 
     for (i in 1:nrow(activities)) {
@@ -32,7 +34,7 @@ get_activity_names <- function() {
 
 assign_names <- function(df) {
     # This function assigns the 561 feature names and 2 other column names
-    # (i.e. "label" and "subject") to the columns of df
+    # (i.e. "subject" and "activity") to the columns of df
 
     # Get column names
     df_names <- get_column_names()
@@ -45,7 +47,7 @@ assign_names <- function(df) {
 
 
 load_and_merge <- function() {
-    # Load in data and merge (i.e. bind to create a single dataframe)
+    # This function loads in data and binds it to create a single dataframe
     # Test data
     X_test <- read.table(paste0(datasets["test"], "X_test.txt"))
     y_test <- read.table(paste0(datasets["test"], "y_test.txt"))
@@ -66,11 +68,13 @@ load_and_merge <- function() {
 
     # Create the main data frame
     df <- bind_rows(train, test)
+
     df
 }
 
 
 get_mean_and_std <- function(df) {
+    # Extract only the columns that have "mean()" or "std()" in their name
     # Get column names
     df_names <- get_column_names()
 
@@ -97,9 +101,14 @@ activities_list <- get_activity_names()
 df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]}))
 
 # Tidy up the column names of the dataframe
-#names(df) <- sub("^f", "frequency.", names(df))
-#names(df) <- gsub("-", ".", names(df))
-#names(df) <- sub("()$", "", names(df))
-#names(df) <- sub("^t", "time.", names(df))
+names(df) <- sub("^f", "frequency.", names(df))
+names(df) <- gsub("-", ".", names(df))
+names(df) <- sub("()$", "", names(df))
+names(df) <- sub("^t", "time.", names(df))
 
+# Group by subject and activity, then find out the average of all observations
+# that have the same subject and activity
+tidy_df <- df %>% group_by(subject, activity) %>% summarise(across(.fns = mean))
 
+# Save the tidy data in a file inside "Data" directory
+write.csv(tidy_data, "./Data/tidy_data.csv")
