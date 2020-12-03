@@ -6,7 +6,7 @@ datasets <- c(test = "./Data/UCI HAR Dataset/test/",
               train = "./Data/UCI HAR Dataset/train/")
 
 
-downloa_and_extract_data <- function() {
+download_and_extract_data <- function() {
     # Check if Data directory exists. If it does not, create it
     if (!dir.exists("./Data")) {
         dir.create("Data")
@@ -102,7 +102,7 @@ get_mean_and_std <- function(df) {
 
 run_analysis <- function() {
     # Download and extract the content of the zip file if needed
-    downloa_and_extract_data()
+    download_and_extract_data()
 
     # Create the merged data frame
     df <- load_and_merge()
