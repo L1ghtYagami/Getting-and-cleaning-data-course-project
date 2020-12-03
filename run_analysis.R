@@ -6,6 +6,26 @@ datasets <- c(test = "./Data/UCI HAR Dataset/test/",
               train = "./Data/UCI HAR Dataset/train/")
 
 
+downloa_and_extract_data <- function() {
+    # Check if Data directory exists. If it does not, create it
+    if (!dir.exists("./Data")) {
+        dir.create("Data")
+    }
+
+    # Check if Dataset.zip file exists or not. If it does not, download it.
+    if (!file.exists("./Data/Dataset.zip")) {
+        download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",
+                      "./Data/Dataset.zip", method = "curl")
+    }
+
+    # Check if the content of Dataset.zip is extracted or not. If they are not,
+    # unzip and extract them inside Data directory
+    if (!dir.exists("./Data/UCI HAR Dataset")) {
+        unzip("./Data/Dataset.zip", exdir = "./Data")
+    }
+}
+
+
 get_column_names <- function() {
     # his function creates a dataframe with features of the data as entries
     df_names <- read.table("./Data/UCI HAR Dataset/features.txt",
@@ -81,6 +101,9 @@ get_mean_and_std <- function(df) {
 
 
 run_analysis <- function() {
+    # Download and extract the content of the zip file if needed
+    downloa_and_extract_data()
+
     # Create the merged data frame
     df <- load_and_merge()
 
