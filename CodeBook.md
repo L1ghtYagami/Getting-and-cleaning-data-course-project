@@ -20,7 +20,7 @@ and the variable `activity` comes from `activity_labels.txt`.
 *   If the variables have two or more words, they are separated by a dot `.`
 *   `mean` and `standardDeviation` always start with lower case letters, used camel
     case when a word follows `mean` or `standard` e.g. `meanFreq`
-*   Used capitalized first letters and abbreviations for measurements,
+*   Used capitalized first letters and abbreviations (if needed) for measurements,
     e.g. body is taken as `Body`, body acceleration as `BodyAcc`
 
 #### Identifier measurements
@@ -94,7 +94,7 @@ time.BodyAccJerkMag.mean
 time.BodyAccJerkMag.standardDeviation
 ````
 
-#### Time domain measurements of  magnitude of body orientation and body jerk orientation
+#### Time domain measurements of magnitude of body orientation and body jerk orientation
 
 ````
 time.BodyGyroMag.mean
@@ -104,7 +104,7 @@ time.BodyGyroJerkMag.mean
 time.BodyGyroJerkMag.standardDeviation
 ````
 
-####  Frequency domain measurements of body, gravitational, and body jerk acceleration along each axis
+#### Frequency domain measurements of body, gravitational, and body jerk acceleration along each axis
 
 ````
 frequency.BodyAcc.mean.X
@@ -132,7 +132,7 @@ frequency.BodyAccJerk.meanFrequency.Y
 frequency.BodyAccJerk.meanFrequency.Z
 ````
 
-####  Frequency domain measurements of body and body jerk orientation along each axis
+#### Frequency domain measurements of body and body jerk orientation along each axis
 
 ````
 frequency.BodyGyro.mean.X
@@ -148,7 +148,7 @@ frequency.BodyGyro.meanFrequency.Y
 frequency.BodyGyro.meanFrequency.Z
 ````
 
-####  Frequency domain measurements of magnitude of body, gravity, and body jerk acceleration 
+#### Frequency domain measurements of magnitude of body, gravity, and body jerk acceleration 
 
 ````
 frequency.BodyAccMag.mean
@@ -160,7 +160,7 @@ frequency.BodyBodyAccJerkMag.standardDeviation
 frequency.BodyBodyAccJerkMag.meanFrequency
 ````
 
-####  Frequency domain measurements of  magnitude of body orientation and body jerk orientation
+#### Frequency domain measurements of magnitude of body orientation and body jerk orientation
 
 ````
 frequency.BodyBodyGyroMag.mean
