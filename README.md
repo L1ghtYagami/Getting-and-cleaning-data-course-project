@@ -86,7 +86,7 @@ run_analysis
         calculates the `mean` of the columns using `group_by()` and `summarise()`
         functions
         
-    7.  Converts the `tibble` automatically created in step 6 into `data.frame`
+    7.  Converts the `data.frame` created in step 6 into `data.frame`
     
     8.  Returns the tidied dataframe.
 
