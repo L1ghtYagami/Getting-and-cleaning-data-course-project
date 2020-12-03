@@ -8,9 +8,9 @@ This file explains the analysis performed by the `run_analysis.R` on the dataset
 ## Steps to download data
 
 This part is optional, as it is covered in the `run_analysis.R` file. But you can
-do this part if you want to look at the folder structure of the dataset beforehand.
+do this part if you want to look at the directory structure of the dataset beforehand.
 
-*   First create a folder and name it "Data"
+*   First create a directory and name it "Data"
 *   Download and save the zip file of the data using this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 *   Extract the contents of the zip file inside "Data"
 
@@ -44,7 +44,7 @@ run_analysis
 
     This function does not take any input. It works in following steps
 
-    1.  Checks if the "Data" folder exists in the main directory. If it does not,
+    1.  Checks if the "Data" directory exists in the main directory. If it does not,
         creates it.
     
     2.  Checks if dataset is downloaded or not. If it is not, downloads it.
@@ -73,7 +73,7 @@ run_analysis
 -   `load_and_merge()`
 
     This function takes no input. It loads different dataframes from text files in
-    "train" and "test" folders and binds them together using `bind_cols()` and 
+    "train" and "test" directories and binds them together using `bind_cols()` and 
     `bind_rows()` functions from `dplyr` package.
     
 -   `get_mean_and_std(df)`
@@ -110,8 +110,8 @@ run_analysis
 
 -   `datasets`
     
-    A named characer vector, names are `test` and `train` and the value is the path
-    to the `test` and `train` directories inside the "Data" folder.
+    A named characer vector, names are `test` and `train` and the values are the
+    path to the `test` and `train` directories inside the "Data" directory.
 
 -   `tidy_df`
 
