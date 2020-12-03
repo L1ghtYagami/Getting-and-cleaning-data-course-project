@@ -99,6 +99,7 @@ activities_list <- get_activity_names()
 
 # Modify the data frame to get the activity names for each label
 df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]}))
+df$activity <- as.character(df$activity)
 
 # Tidy up the column names of the dataframe
 names(df) <- sub("^f", "frequency.", names(df))
@@ -116,4 +117,4 @@ tidy_df <- as.data.frame(tidy_df)
 tidy_df <- apply(tidy_df, 2, as.character)
 
 # Save the tidy data in a file inside "Data" directory
-write.csv(tidy_df, "./tidy_data.csv", row.names = FALSE)
+write.table(tidy_df, "./tidy_data.csv", row.names = FALSE)
