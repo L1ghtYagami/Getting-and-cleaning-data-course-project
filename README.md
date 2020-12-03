@@ -85,3 +85,15 @@ run_analysis
     7.  Converts the `tibble` automatically created in step 6 into `data.frame`
     
     8.  Returns the tidied dataframe.
+
+### Other variables
+
+-   `datasets`
+    
+    A named characer vector, names are `test` and `train` and the value is the path
+    to the `test` and `train` directories inside the "Data" folder.
+
+-   `tidy_df`
+
+    The tidy `data.frame` variable returned by `run_analysis()` function. This is
+    then converted from `dat.frame` to `matrix` to store it as a text file.
