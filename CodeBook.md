@@ -4,8 +4,7 @@ Getting and Cleaning Data Code Book
 ### Introduction
 
 This is the code book for the project of Getting and Cleaning Data course. This
-file describes variables used, the data used and the transformations performed
-to get the tidy data.
+file describes variables used and the data used.
 
 ### Variables Used
 
