@@ -74,46 +74,44 @@ load_and_merge <- function() {
 
 
 get_mean_and_std <- function(df) {
-    # Extract only the columns that have "mean()" or "std()" in their name
-    # Get column names
-    df_names <- get_column_names()
+    # Extract only the columns that have "mean" or "std" in their name
+    df <- select(df, c("subject", "activity", contains("mean", ignore.case = FALSE) |
+                     contains("std", ignore.case = FALSE)))
+}
 
-    # Keep only the columns where mean() or std() is present
-    df_names <- df_names[grepl("mean()|std()", df_names)]
-    indices <- which(names(df) %in% df_names)
 
-    df <- df[, c(1, 2, indices)]
+run_analysis <- function() {
+    # Create the merged data frame
+    df <- load_and_merge()
+
+    # Select only the relevant columns from df
+    df <- get_mean_and_std(df)
+
+    # Extract activities as a list where label = activity
+    activities_list <- get_activity_names()
+
+    # Modify the data frame to get the activity names for each label
+    df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]}))
+    df$activity <- as.character(df$activity)
+
+    # Tidy up the column names of the dataframe
+    names(df) <- sub("^f", "frequency.", names(df))
+    names(df) <- gsub("-", ".", names(df))
+    names(df) <- sub("[(][)]", "", names(df))
+    names(df) <- sub("^t", "time.", names(df))
+    names(df) <- sub("std", "standardDeviation", names(df))
+
+    # Group by subject and activity, then find out the average of all observations
+    # that have the same subject and activity
+    df <- df %>% group_by(subject, activity) %>% summarise(across(.fns = mean))
+
+    # Convert tidy_df to dataframe
+    df <- as.data.frame(df)
 
     df
 }
 
-
-# Create the merged data frame
-df <- load_and_merge()
-
-# Select only the relevant columns from df
-df <- get_mean_and_std(df)
-
-# Extract activities as a list where label = activity
-activities_list <- get_activity_names()
-
-# Modify the data frame to get the activity names for each label
-df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]}))
-df$activity <- as.character(df$activity)
-
-# Tidy up the column names of the dataframe
-names(df) <- sub("^f", "frequency.", names(df))
-names(df) <- gsub("-", ".", names(df))
-names(df) <- sub("[(][)]", "", names(df))
-names(df) <- sub("^t", "time.", names(df))
-names(df) <- sub("std", "standardDeviation", names(df))
-
-# Group by subject and activity, then find out the average of all observations
-# that have the same subject and activity
-tidy_df <- df %>% group_by(subject, activity) %>% summarise(across(.fns = mean))
-
-# Convert tidy_df to dataframe
-tidy_df <- as.data.frame(tidy_df)
+tidy_df <- run_analysis()
 tidy_df <- apply(tidy_df, 2, as.character)
 
 # Save the tidy data in a file inside "Data" directory
