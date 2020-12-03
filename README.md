@@ -7,6 +7,9 @@ This file explains the analysis performed by the `run_analysis.R` on the dataset
 
 ## Steps to download data
 
+This part is optional, as it is covered in the `run_analysis.R` file. But you can
+do this part if you want to look at the folder structure of the dataset beforehand.
+
 *   First create a folder and name it "Data"
 *   Download and save the zip file of the data using this [link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 *   Extract the contents of the zip file inside "Data"
@@ -26,6 +29,7 @@ dplyr
 There are six functions that are used to load and tidy the data.
 
 ```
+download_and_extract_data
 get_column_names
 get_activity_names
 assign_names
@@ -36,37 +40,49 @@ run_analysis
 
 #### Description
 
--  `get_column_names()`
+-   `download_and_extract_data()`
+
+    This function does not take any input. It works in following steps
+
+    1.  Checks if the "Data" folder exists in the main directory. If it does not,
+        creates it.
+    
+    2.  Checks if dataset is downloaded or not. If it is not, downloads it.
+    
+    3.  Checks if the data is extracted from the zip file. If it is not, extracts
+        it.
+
+-   `get_column_names()`
 
     This function takes no input and returns a `character` vector of the names of
     the features obtained from `features.txt` file.
     
--  `get_activity_names()`
+-   `get_activity_names()`
 
     This function does not take any input and returns a named `list` where the
     names are activity `labels` (from `1` to `6`) and the values are names of the
     `activity` (one of `STANDING, SITTING, LAYING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS`)
     obtained from `activity_labels.txt' file.
     
--  `assign_names(df)`
+-   `assign_names(df)`
 
     This function takes as input the dataframe `df` and returns the dataframe `df`
     with changed column names. The new column names assigned to the dataframe are
     obtained with `get_column_names()` function.
     
--  `load_and_merge()`
+-   `load_and_merge()`
 
     This function takes no input. It loads different dataframes from text files in
     "train" and "test" folders and binds them together using `bind_cols()` and 
     `bind_rows()` functions from `dplyr` package.
     
--  `get_mean_and_std(df)`
+-   `get_mean_and_std(df)`
 
     This function takes a dataframe `df` as input and returns the dataframe with
     columns that have `mean` and `std` in them (strictly lowercase) along with 
     `subject` and `activity` columns.
 
--  `run_analysis()`
+-   `run_analysis()`
 
     This function is the main function that runs the analysis on the data, and
     returns the tidied dataframe. The steps it takes is as follows:
