@@ -105,6 +105,7 @@ names(df) <- sub("^f", "frequency.", names(df))
 names(df) <- gsub("-", ".", names(df))
 names(df) <- sub("[(][)]", "", names(df))
 names(df) <- sub("^t", "time.", names(df))
+names(df) <- sub("std", "standardDeviation", names(df))
 
 # Group by subject and activity, then find out the average of all observations
 # that have the same subject and activity
@@ -115,4 +116,4 @@ tidy_df <- as.data.frame(tidy_df)
 tidy_df <- apply(tidy_df, 2, as.character)
 
 # Save the tidy data in a file inside "Data" directory
-write.csv(tidy_df, "./Data/tidy_data.csv", row.names = FALSE)
+write.csv(tidy_df, "./tidy_data.csv", row.names = FALSE)
