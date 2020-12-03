@@ -17,6 +17,10 @@ Now you are ready to run `run_analysis.R`
 
 There is the actual code inside the file `run_analysis.R` and some supporting functions.
 
+### Packages
+```
+dplyr
+```
 ### Functions
 
 There are six functions that are used to load and tidy the data.
