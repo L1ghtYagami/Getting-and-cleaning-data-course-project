@@ -100,4 +100,4 @@ run_analysis
 -   `tidy_df`
 
     The tidy `data.frame` variable returned by `run_analysis()` function. This is
-    then converted from `dat.frame` to `matrix` to store it as a text file.
+    then converted from `data.frame` to `matrix` to store it as a text file.
