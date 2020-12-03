@@ -32,7 +32,7 @@ and the variable `activity` comes from `activity_labels.txt`.
 
 ***NOTE***: The combination of `subject` and `activity` makes up the identifier,
             i.e. `(1, STANDING), (1, SITTING), ..., (30, WALKING_DOWNSTAIRS), (30, WALKING_UPSTAIRS)`
-            make up all the observations in the data. (Total `30*6` observations)
+            make up all the observations in the data. (Total `30*6=180` observations)
 
 #### Time domain measurements of body, gravitational, and body jerk acceleration along each axis
 
