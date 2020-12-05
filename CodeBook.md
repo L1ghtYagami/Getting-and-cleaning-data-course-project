@@ -170,3 +170,9 @@ frequency.BodyBodyGyroJerkMag.mean
 frequency.BodyBodyGyroJerkMag.standardDeviation
 frequency.BodyBodyGyroJerkMag.meanFrequency"
 ````
+
+### Variable classes
+
+-   The variable `subject` is of class `integer`
+-   The variable `activity` is of class `character`
+-   All other variables are of class `numeric`
