@@ -95,8 +95,12 @@ load_and_merge <- function() {
 
 get_mean_and_std <- function(df) {
     # Extract only the columns that have "mean" or "std" in their name
-    df <- select(df, c("subject", "activity", contains("mean", ignore.case = FALSE) |
-                     contains("std", ignore.case = FALSE)))
+    df <- select(df,
+                 c("subject",
+                   "activity",
+                   contains("mean", ignore.case = FALSE) | contains("std", ignore.case = FALSE)
+                   )
+                 )
 }
 
 
@@ -114,7 +118,8 @@ run_analysis <- function() {
     activities_list <- get_activity_names()
 
     # Modify the data frame to get the activity names for each label
-    df <- df %>% mutate(activity = sapply(activity, function(x){activities_list[x]}))
+    df <- df %>% mutate(activity = sapply(activity,
+                                          function(x){activities_list[x]}))
     df$activity <- as.character(df$activity)
 
     # Tidy up the column names of the dataframe
@@ -125,10 +130,10 @@ run_analysis <- function() {
     names(df) <- sub("std", "standardDeviation", names(df))
 
     # Group by subject and activity, then find out the average of all observations
-    # that have the same subject and activity
+    # that have the same subject and activity (automatically creates a tibble object)
     df <- df %>% group_by(subject, activity) %>% summarise(across(.fns = mean))
 
-    # Convert tidy_df to dataframe
+    # Convert the df back to dataframe
     df <- as.data.frame(df)
 
     df
