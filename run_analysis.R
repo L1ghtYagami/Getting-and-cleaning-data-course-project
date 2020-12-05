@@ -27,7 +27,7 @@ download_and_extract_data <- function() {
 
 
 get_column_names <- function() {
-    # his function creates a dataframe with features of the data as entries
+    # This function creates a dataframe with features of the data as entries
     df_names <- read.table("./Data/UCI HAR Dataset/features.txt",
                            col.names = c("index", "feature"))
 
