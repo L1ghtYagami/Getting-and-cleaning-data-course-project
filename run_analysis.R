@@ -138,4 +138,4 @@ tidy_df <- run_analysis()
 tidy_df <- apply(tidy_df, 2, as.character)
 
 # Save the tidy data in a file inside "Data" directory
-write.table(tidy_df, "./tidy_data.csv", row.names = FALSE)
+write.table(tidy_df, "./tidy_data.txt", row.names = FALSE)
